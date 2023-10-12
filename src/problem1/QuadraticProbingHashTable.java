@@ -4,9 +4,7 @@ import java.util.Arrays;
 
 public class QuadraticProbingHashTable <AnyType> {
 
-    public QuadraticProbingHashTable(){
-        this(DEFAULT_TABLE_SIZE);
-    }
+
     public QuadraticProbingHashTable(int size) {
         allocateArray(size);
         makeEmpty();
@@ -53,8 +51,6 @@ public class QuadraticProbingHashTable <AnyType> {
         }
     }
 
-    private static final int DEFAULT_TABLE_SIZE = 11;
-
     private HashEntry<AnyType>[] array;
     private int currentSize;
 
@@ -90,18 +86,48 @@ public class QuadraticProbingHashTable <AnyType> {
     }
 
     private int myHash(AnyType x) {
-        int hashVal = x.hashCode() % array.length;
-        if (hashVal < 0) {
-            hashVal += array.length;
-        }
-        return hashVal;
+        int hashcode = x.hashCode();
+        int mod = hashcode % 2;
+        return 0; // testing for collisions
     }
 
     private static int nextPrime(int n) {
-        return 0;
+        if (n <= 2) {
+            return 2;
+        }
+
+        int nextPrime = n;
+        boolean found = false;
+
+        while (!found) {
+            nextPrime++;
+            if (isPrime(nextPrime)) {
+                found = true;
+            }
+        }
+
+        return nextPrime;
     }
 
-    private static boolean isPrime(int n){
+    private static boolean isPrime(int n) {
+        if (n <= 1) {
+            return false;
+        }
+        if (n <= 3) {
+            return true;
+        }
+        if (n % 2 == 0 || n % 3 == 0) {
+            return false;
+        }
+
+        int i = 5;
+        while (i * i <= n) {
+            if (n % i == 0 || n % (i + 2) == 0) {
+                return false;
+            }
+            i += 6;
+        }
+
         return true;
     }
 }
