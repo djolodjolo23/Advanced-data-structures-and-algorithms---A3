@@ -4,6 +4,10 @@ import java.util.Arrays;
 
 public class QuadraticProbingHashTable <AnyType> {
 
+    public QuadraticProbingHashTable() {
+        this(DEFAULT_TABLE_SIZE);
+    }
+
 
     public QuadraticProbingHashTable(int size) {
         allocateArray(size);
@@ -26,10 +30,7 @@ public class QuadraticProbingHashTable <AnyType> {
             return;
         }
         array[currentPos] = new HashEntry<>(x, true);
-
-        if (++currentSize > array.length / 2) {
-            rehash();
-        }
+        currentSize++;
     }
 
     public void remove(AnyType x) {
@@ -39,7 +40,7 @@ public class QuadraticProbingHashTable <AnyType> {
         }
     }
 
-    private static class HashEntry<AnyType> {
+    protected static class HashEntry<AnyType> {
         public AnyType element;
         public boolean isActive;
 
@@ -51,8 +52,10 @@ public class QuadraticProbingHashTable <AnyType> {
         }
     }
 
-    private HashEntry<AnyType>[] array;
-    private int currentSize;
+    private static final int DEFAULT_TABLE_SIZE = 19;
+
+    protected HashEntry<AnyType>[] array;
+    protected int currentSize;
 
     private void allocateArray(int arraySize) {
         array = new HashEntry[nextPrime(arraySize)];
@@ -60,6 +63,8 @@ public class QuadraticProbingHashTable <AnyType> {
     private boolean isActive(int currentPos) {
         return array[currentPos] != null && array[currentPos].isActive;
     }
+
+
     private int findPos(AnyType x) {
         int offset = 1;
         int currentPos = myHash(x);
@@ -73,61 +78,32 @@ public class QuadraticProbingHashTable <AnyType> {
         }
         return currentPos;
     }
-    private void rehash() {
-        HashEntry<AnyType> [] oldArray = array;
-        allocateArray(nextPrime(2 * oldArray.length));
-        currentSize = 0;
 
-        for (HashEntry<AnyType> anyTypeHashEntry : oldArray) {
-            if (anyTypeHashEntry != null && anyTypeHashEntry.isActive) {
-                insert(anyTypeHashEntry.element);
-            }
-        }
-    }
 
     private int myHash(AnyType x) {
         int hashcode = x.hashCode();
-        int mod = hashcode % 2;
-        return 0; // testing for collisions
+        int hashValue = hashcode % array.length;
+        if (hashValue < 0) {
+            hashValue += array.length;
+        }
+        return hashValue;
     }
 
-    private static int nextPrime(int n) {
-        if (n <= 2) {
-            return 2;
-        }
 
+    private int nextPrime(int n) {
+        boolean isPrime = false;
         int nextPrime = n;
-        boolean found = false;
-
-        while (!found) {
+        while (!isPrime) {
+            isPrime = true;
             nextPrime++;
-            if (isPrime(nextPrime)) {
-                found = true;
+            for (int i = 2; i <= n/2; i++) {
+                if (n % i == 0) {
+                    isPrime = false;
+                    break;
+                }
             }
         }
-
         return nextPrime;
     }
 
-    private static boolean isPrime(int n) {
-        if (n <= 1) {
-            return false;
-        }
-        if (n <= 3) {
-            return true;
-        }
-        if (n % 2 == 0 || n % 3 == 0) {
-            return false;
-        }
-
-        int i = 5;
-        while (i * i <= n) {
-            if (n % i == 0 || n % (i + 2) == 0) {
-                return false;
-            }
-            i += 6;
-        }
-
-        return true;
-    }
 }
