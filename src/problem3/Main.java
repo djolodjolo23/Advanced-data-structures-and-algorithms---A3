@@ -8,8 +8,8 @@ public class Main {
 
 
         Integer[] array = {2, 8, 5, 3, 9, 4};
-        SortStuff<Integer> sortStuff = new SortStuff<>();
-        sortStuff.insertSort(array);
+        InsertSort<Integer> insertSort = new InsertSort<>();
+        insertSort.doInsertSort(array);
 
         System.out.println(Arrays.toString(array));
 
