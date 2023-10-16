@@ -1,5 +1,7 @@
 package problem4;
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -9,5 +11,6 @@ public class Main {
 
         heap.doHeapSort(array);
 
+        System.out.println("Sorted array: " + Arrays.toString(array));
     }
 }
