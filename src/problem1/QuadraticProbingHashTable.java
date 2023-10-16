@@ -1,6 +1,9 @@
 package problem1;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 
 public class QuadraticProbingHashTable <AnyType> {
 
@@ -12,6 +15,7 @@ public class QuadraticProbingHashTable <AnyType> {
     public QuadraticProbingHashTable(int size) {
         allocateArray(size);
         makeEmpty();
+        stats = new ArrayList<>();
     }
 
     public void makeEmpty() {
@@ -52,10 +56,37 @@ public class QuadraticProbingHashTable <AnyType> {
         }
     }
 
+    public static class Stats<AnyType> {
+        private AnyType element;
+
+        private int firstPos;
+
+        private int finalPos;
+        private int probeCount;
+
+        private Stats(AnyType e, int flp, int p) {
+            element = e;
+            firstPos = flp;
+            probeCount = p;
+        }
+
+        private void incrementProbe() {
+            probeCount++;
+        }
+
+        private void setFinalPos(int finalPos) {
+            this.finalPos = finalPos;
+        }
+
+    }
+
     private static final int DEFAULT_TABLE_SIZE = 19;
 
     protected HashEntry<AnyType>[] array;
+
+    public List<Stats<AnyType>> stats;
     protected int currentSize;
+
 
     private void allocateArray(int arraySize) {
         array = new HashEntry[nextPrime(arraySize)];
@@ -68,14 +99,17 @@ public class QuadraticProbingHashTable <AnyType> {
     private int findPos(AnyType x) {
         int offset = 1;
         int currentPos = myHash(x);
-
+        Stats<AnyType> current = new Stats<>(x, currentPos, 0);
+        stats.add(current);
         while (array[currentPos] != null && !array[currentPos].element.equals(x)) {
             currentPos += offset;
             offset += 2;
+            current.incrementProbe();
             if (currentPos >= array.length) {
                 currentPos -= array.length;
             }
         }
+        current.setFinalPos(currentPos);
         return currentPos;
     }
 
@@ -105,5 +139,10 @@ public class QuadraticProbingHashTable <AnyType> {
         }
         return nextPrime;
     }
+
+    public List<Stats<AnyType>> getStats() {
+        return stats;
+    }
+
 
 }

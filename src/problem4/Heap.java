@@ -1,13 +1,9 @@
 package problem4;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Heap<AnyType extends Comparable<AnyType>> {
 
 
     public void doHeapSort(AnyType[] array) {
-        if (array == null || array.length <= 1) {
+        if (array == null || array.length < 2) {
             return;
         }
         int n = array.length;
@@ -24,6 +20,7 @@ public class Heap<AnyType extends Comparable<AnyType>> {
         }
     }
 
+
     private void heapify(AnyType[] array, int n, int parentIndex) {
         int largest = parentIndex;
         int leftChild = 2 * parentIndex + 1;
@@ -32,11 +29,9 @@ public class Heap<AnyType extends Comparable<AnyType>> {
         if (leftChild < n && array[leftChild].compareTo(array[largest]) > 0) {
             largest = leftChild;
         }
-
         if (rightChild < n && array[rightChild].compareTo(array[largest]) > 0) {
             largest = rightChild;
         }
-
         if (largest != parentIndex) {
             AnyType temp = array[parentIndex];
             array[parentIndex] = array[largest];
