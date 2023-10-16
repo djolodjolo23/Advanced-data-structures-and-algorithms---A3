@@ -78,6 +78,10 @@ public class QuadraticProbingHashTable <AnyType> {
             this.finalPos = finalPos;
         }
 
+        public int getFirstPos() {
+            return firstPos;
+        }
+
     }
 
     private static final int DEFAULT_TABLE_SIZE = 19;
