@@ -89,8 +89,15 @@ public class QuadraticProbingHashTable <AnyType> {
     protected HashEntry<AnyType>[] array;
 
     public List<Stats<AnyType>> stats;
+
+    public int firstCollisionOccurrenceAt;
     protected int currentSize;
 
+    private boolean collisionOccurred = false;
+
+    public int getFirstCollisionOccurrenceAt() {
+        return firstCollisionOccurrenceAt;
+    }
 
     private void allocateArray(int arraySize) {
         array = new HashEntry[nextPrime(arraySize)];
@@ -106,6 +113,19 @@ public class QuadraticProbingHashTable <AnyType> {
         Stats<AnyType> current = new Stats<>(x, currentPos, 0);
         stats.add(current);
         while (array[currentPos] != null && !array[currentPos].element.equals(x)) {
+            if (!collisionOccurred) {
+                int counter = 0;
+                for (HashEntry<AnyType> entry : array) {
+                    if (entry != null) {
+                        counter++;
+                    }
+                }
+                if (counter == 0) {
+                    counter = 11; // shouldnt be here
+                }
+                firstCollisionOccurrenceAt = counter;
+                collisionOccurred = true;
+            }
             currentPos += offset;
             offset += 2;
             current.incrementProbe();

@@ -12,19 +12,25 @@ public class Main {
 
         QuadraticProbingHashTable<Car> quadraticProbingHashTable = new QuadraticProbingHashTable<>();
 
-        List<List<QuadraticProbingHashTable.Stats<Car>>> allStats = new ArrayList<>();
+        List<List<QuadraticProbingHashTable.Stats<Car>>> hashTableOccurrences = new ArrayList<>();
 
-        for (int i = 0; i < 50; i++) {
-            for (int j = 0; j < 11; j++) {
+        List<Integer> collisionsAt = new ArrayList<>();
+
+        for (int i = 0; i < 100; i++) {
+            for (int j = 0; j < 10; j++) {
                 quadraticProbingHashTable.insert(new Car());
             }
-            allStats.add(quadraticProbingHashTable.getStats());
+            hashTableOccurrences.add(quadraticProbingHashTable.getStats());
+            collisionsAt.add(quadraticProbingHashTable.getFirstCollisionOccurrenceAt());
             quadraticProbingHashTable = new QuadraticProbingHashTable<>();
         }
 
-        Statistics<QuadraticProbingHashTable.Stats<Car>> statistics = new Statistics();
+        Statistics<QuadraticProbingHashTable.Stats<Car>> statistics = new Statistics<>();
 
-        Map<Integer, Integer> map = statistics.getOccurrences(allStats);
+        //collisionsAt.removeIf(element -> element == 0);
+
+        Map<Integer, Integer> countedPositions = statistics.getOccurrences(hashTableOccurrences);
+        double avgColision = statistics.findAverage(collisionsAt);
 
 
         System.out.println();

@@ -58,8 +58,6 @@ public class Car {
         return result;
     }
 
-    public void test(){};
-
 
     private int customHash(Object object) {
         int hashVal = 0;
@@ -94,7 +92,6 @@ public class Car {
         int red = random.nextInt(256);
         int green = random.nextInt(256);
         int blue = random.nextInt(256);
-
         return String.format("#%02x%02x%02x", red, green, blue);
     }
 

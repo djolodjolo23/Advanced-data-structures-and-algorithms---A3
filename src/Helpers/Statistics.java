@@ -21,5 +21,13 @@ public class Statistics<AnyType> {
         return map;
     }
 
+    public double findAverage(List<Integer> list) {
+        int sum = 0;
+        for (Integer element : list) {
+            sum += element;
+        }
+        return (double) sum / list.size();
+    }
+
 
 }
