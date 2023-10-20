@@ -51,9 +51,9 @@ public class Car {
         result = 31 * result + customHash(year);
         result = 31 * result + customHash(make);
         if (transmission == 'A') {
-            result += 11;
+            result += 41;
         } else {
-            result += 23;
+            result += 79;
         }
         return result;
     }
@@ -88,12 +88,14 @@ public class Car {
         return random.nextInt(2023 - 1970) + 1970;
     }
 
+
     private String generateColour() {
         int red = random.nextInt(256);
         int green = random.nextInt(256);
         int blue = random.nextInt(256);
         return String.format("#%02x%02x%02x", red, green, blue);
     }
+
 
     private String generateMake() {
         String[] makes = {"BMW", "Mercedes", "Audi", "Volkswagen", "Porsche", "Opel", "Ford",
@@ -104,8 +106,5 @@ public class Car {
                 "Cadillac", "Lincoln", "Acura"};
         return makes[random.nextInt(makes.length)];
     }
-
-
-
 
 }

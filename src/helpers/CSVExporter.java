@@ -1,4 +1,4 @@
-package Helpers;
+package helpers;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.List;
 public class CSVExporter<AnyType> {
 
 
-  public void exportTimesToCSV(List<AnyType> dataList, String fileName) {
+  public void exportDataToCSV(List<AnyType> dataList, String fileName) {
     try (FileWriter csvWriter = new FileWriter(fileName)) {
       for (AnyType data : dataList) {
         csvWriter.append(data.toString());

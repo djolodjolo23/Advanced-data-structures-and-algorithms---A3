@@ -1,8 +1,8 @@
 package problem4;
-public class Heap<AnyType extends Comparable<AnyType>> {
+public class HeapSort {
 
 
-    public void doHeapSort(AnyType[] array) {
+    public static<AnyType extends Comparable<? super AnyType>> void doHeapSort(AnyType[] array) {
         if (array == null || array.length < 2) {
             return;
         }
@@ -21,7 +21,7 @@ public class Heap<AnyType extends Comparable<AnyType>> {
     }
 
 
-    private void heapify(AnyType[] array, int n, int parentIndex) {
+    private static<AnyType extends Comparable<? super AnyType>>void heapify(AnyType[] array, int n, int parentIndex) {
         int largest = parentIndex;
         int leftChild = 2 * parentIndex + 1;
         int rightChild = 2 * parentIndex + 2;

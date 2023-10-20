@@ -84,7 +84,7 @@ public class QuadraticProbingHashTable <AnyType> {
 
     }
 
-    private static final int DEFAULT_TABLE_SIZE = 19;
+    private static final int DEFAULT_TABLE_SIZE = 23;
 
     protected HashEntry<AnyType>[] array;
 
@@ -119,9 +119,6 @@ public class QuadraticProbingHashTable <AnyType> {
                     if (entry != null) {
                         counter++;
                     }
-                }
-                if (counter == 0) {
-                    counter = 11; // shouldnt be here
                 }
                 firstCollisionOccurrenceAt = counter;
                 collisionOccurred = true;

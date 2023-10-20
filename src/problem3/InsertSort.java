@@ -1,10 +1,9 @@
 package problem3;
 
-public class InsertSort<AnyType extends Comparable<AnyType>> {
+public class InsertSort {
 
-
-    public void doInsertSort(AnyType[] array){
-        for (int i = 0; i < array.length - 1; i++) {
+    public static<AnyType extends Comparable<? super AnyType>> void doInsertSort(AnyType[] array, int low, int high){
+        for (int i = low; i < high; i++) {
             for (int j = i + 1; j > 0; j--) {
                 int result = array[j].compareTo(array[j-1]);
                 if (result < 0) {

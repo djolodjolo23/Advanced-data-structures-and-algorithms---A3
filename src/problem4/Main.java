@@ -7,9 +7,7 @@ public class Main {
 
         Integer[] array = {10, 20, 15, 12, 40, 25, 18};
 
-        Heap<Integer> heap = new Heap<>();
-
-        heap.doHeapSort(array);
+        HeapSort.doHeapSort(array);
 
         System.out.println("Sorted array: " + Arrays.toString(array));
     }
