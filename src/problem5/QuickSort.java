@@ -4,18 +4,18 @@ import problem3.InsertSort;
 
 public class QuickSort {
 
-    public static <AnyType extends Comparable<? super AnyType>> void doQuickSort(AnyType[] a, int depth) { // int depth
+    public static <AnyType extends Comparable<? super AnyType>> void doQuickSort(AnyType[] a, int depth) {
         quicksort(a, 0, a.length - 1, depth);
     }
 
-    private static <AnyType extends Comparable<? super AnyType>> void quicksort(AnyType[] a, int low, int high, int depth) { // int depth
-        if (low < high && depth > 0) { // depth>0
+    private static <AnyType extends Comparable<? super AnyType>> void quicksort(AnyType[] a, int low, int high, int depth) {
+        if (low < high && depth > 0) {
             int pivotIndex = getPivotIndex(a, low, high);
             AnyType pivot = a[pivotIndex];
             swapReferences(a, pivotIndex, high);
             int sliceIndex = slice(a, low, high, pivot);
-            quicksort(a, low, sliceIndex - 1, --depth); // --depth
-            quicksort(a, sliceIndex + 1, high, --depth); // -depth
+            quicksort(a, low, sliceIndex - 1, --depth);
+            quicksort(a, sliceIndex + 1, high, --depth);
         } else {
             InsertSort.doInsertSort(a, low, high);
         }
@@ -57,6 +57,4 @@ public class QuickSort {
         a[i] = a[j];
         a[j] = temp;
     }
-
-
 }
