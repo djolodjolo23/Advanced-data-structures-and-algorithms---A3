@@ -46,10 +46,11 @@ public class Car {
     @Override
     public int hashCode() {
         int result = 17;
-        result = 31 * result + customHash(licensePlateNumber);
-        result = 31 * result + customHash(colour);
-        result = 31 * result + customHash(year);
-        result = 31 * result + customHash(make);
+        result += customHash(licensePlateNumber);
+        result += customHash(year);
+        result += customHash(colour);
+        result += customHash(make);
+        result *= 31;
         if (transmission == 'A') {
             result += 41;
         } else {
@@ -61,13 +62,16 @@ public class Car {
 
     private int customHash(Object object) {
         int hashVal = 0;
-        for (int i = 0; i < object.toString().length(); i++) {
-            int charVal = object.toString().charAt(i);
-            hashVal += charVal;
-            hashVal = hashVal * charVal;
+        String str = object.toString();
+        for (int i = 0; i < str.length(); i++) {
+            if (i % 2 == 1) {
+                int charVal = str.charAt(i);
+                hashVal += charVal;
+            }
         }
         return hashVal;
     }
+
 
     private char generateTransmission() {
         return random.nextBoolean() ? 'A' : 'M';
