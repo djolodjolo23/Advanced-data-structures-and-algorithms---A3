@@ -33,12 +33,7 @@ public class Statistics<AnyType> {
     }
 
 
-    public int getReccommendedDepth(AnyType[] array) {
-        int n = array.length;
-        return (int) (Math.log(n) / Math.log(2));
-    }
-
-    public int getDepth(AnyType[] array) {
+    public int getRecommendedDepth(AnyType[] array) {
         int depth = 0;
         int n = array.length;
         while (n / 2 > 20) {

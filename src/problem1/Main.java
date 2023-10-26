@@ -11,6 +11,8 @@ public class Main {
 
     public static void main(String[] args) {
 
+
+
         QuadraticProbingHashTable<String> quadraticProbingHashTable = new QuadraticProbingHashTable<>();
 
         List<List<QuadraticProbingHashTable.Stats<String>>> hashTableOccurrences = new ArrayList<>();
@@ -21,7 +23,7 @@ public class Main {
 
         List<Integer> collisionsAt = new ArrayList<>();
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             for (int j = 0; j < 10; j++) {
                 quadraticProbingHashTable.insert(statistics.generateRandomString());
             }
@@ -31,6 +33,7 @@ public class Main {
         }
 
         //collisionsAt.removeIf(element -> element == 0);
+
 
         int noCollisions = 0;
         for (int i = 0; i < collisionsAt.size(); i++) {

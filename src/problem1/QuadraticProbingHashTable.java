@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * QuadraticProbingHashTable class implements a hash table with quadratic probing to resolve collisions.
+ * Note that a big portion of the code is taken from the book examples.
+ * @param <AnyType> generic type of the hash table.
+ */
 public class QuadraticProbingHashTable <AnyType> {
 
     public QuadraticProbingHashTable() {
@@ -56,6 +60,10 @@ public class QuadraticProbingHashTable <AnyType> {
         }
     }
 
+    /**
+     * The inner class Stats is used to store the statistics of the hash table.
+     * @param <AnyType> generic type of the hash table.
+     */
     public static class Stats<AnyType> {
         private AnyType element;
 
@@ -80,6 +88,10 @@ public class QuadraticProbingHashTable <AnyType> {
 
         public int getFirstPos() {
             return firstPos;
+        }
+
+        public int getProbeCount() {
+            return probeCount;
         }
 
     }
@@ -112,26 +124,35 @@ public class QuadraticProbingHashTable <AnyType> {
         int currentPos = myHash(x);
         Stats<AnyType> current = new Stats<>(x, currentPos, 0);
         stats.add(current);
-        while (array[currentPos] != null && !array[currentPos].element.equals(x)) {
-            if (!collisionOccurred) {
-                int counter = 0;
-                for (HashEntry<AnyType> entry : array) {
-                    if (entry != null) {
-                        counter++;
+        while (true) {
+            try {
+                while (array[currentPos] != null && !array[currentPos].element.equals(x)) {
+                    if (!collisionOccurred) {
+                        int counter = 0;
+                        for (HashEntry<AnyType> entry : array) {
+                            if (entry != null) {
+                                counter++;
+                            }
+                        }
+                        firstCollisionOccurrenceAt = counter;
+                        collisionOccurred = true;
+                    }
+                    currentPos += offset;
+                    offset += 2;
+                    current.incrementProbe();
+                    if (currentPos >= array.length) {
+                        currentPos -= array.length;
                     }
                 }
-                firstCollisionOccurrenceAt = counter;
-                collisionOccurred = true;
-            }
-            currentPos += offset;
-            offset += 2;
-            current.incrementProbe();
-            if (currentPos >= array.length) {
-                currentPos -= array.length;
+                current.setFinalPos(currentPos);
+                return currentPos;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                            // sometimes, but very rarely (1 in 500 runs on average), the program crashes with ArrayIndexOutOfBoundsException, when offset is too big
+                offset = 2; // reseting offset to 2 to avoid that, since I did not want to use rehash() method
+                            // to increase the size of the array. It's more clear for analysis without rehash.
+                currentPos = myHash(x);
             }
         }
-        current.setFinalPos(currentPos);
-        return currentPos;
     }
 
 

@@ -21,14 +21,14 @@ public class Main {
         Statistics<Integer> statistics = new Statistics<>();
 
 
-        Integer [] arrayzz = new Integer[100];
-        for (int i = 0; i < arrayzz.length; i++) {
-            arrayzz[i] = random.nextInt(1000);
+        Integer [] array = new Integer[100];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = random.nextInt(1000);
         }
-        int depth = statistics.getReccommendedDepth(arrayzz);
-        int depthTest = statistics.getDepth(arrayzz);
 
-        QuickSort.doQuickSort(arrayzz, depthTest);
+        int recommendedDepth = statistics.getRecommendedDepth(array);
+
+        QuickSort.doQuickSort(array, recommendedDepth);
 
 
 

@@ -5,6 +5,7 @@ import helpers.Statistics;
 import problem1.QuadraticProbingHashTable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +31,76 @@ public class Main {
         }
 
         Statistics<QuadraticProbingHashTable.Stats<Car>> statistics = new Statistics<>();
+        Map<Integer, Integer> probeCountMap = new HashMap<>();
 
-        //collisionsAt.removeIf(element -> element == 0);
+        /*
+        for (List<QuadraticProbingHashTable.Stats<Car>> stats : hashTableOccurrences) {
+            for (QuadraticProbingHashTable.Stats<Car> stat : stats) {
+                if (stat.getProbeCount() > 0) {
+                    // print index from the hash table and the number of probes
+                    System.out.println("Car Index :" + stats.indexOf(stat));
+                    System.out.println("Probes: " + stat.getProbeCount());
+                }
+            }
+            System.out.println();
+        }
+
+         */
+
+        List<Integer> allProbes = new ArrayList<>();
+
+
+        for (List<QuadraticProbingHashTable.Stats<Car>> stats : hashTableOccurrences) {
+            for (QuadraticProbingHashTable.Stats<Car> stat : stats) {
+                if (stat.getProbeCount() > 0) {
+                    int carIndex = stats.indexOf(stat);
+                    int probes = stat.getProbeCount();
+                    allProbes.add(probes);
+                    if (probeCountMap.containsKey(carIndex)) {
+                        int currentProbeCount = probeCountMap.get(carIndex);
+                        probeCountMap.put(carIndex, currentProbeCount + probes);
+                    } else {
+                        probeCountMap.put(carIndex, probes);
+                    }
+                }
+            }
+        }
+
+
+        // Ensure the list is not empty
+        if (allProbes.isEmpty()) {
+            System.out.println("The list is empty.");
+            return;
+        }
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        int sum = 0;
+        for (int num : allProbes) {
+            if (num < min) {
+                min = num;
+            }
+            if (num > max) {
+                max = num;
+            }
+            sum += num;
+        }
+
+        int average = sum / allProbes.size();
+
+        System.out.println("Minimum: " + min);
+        System.out.println("Maximum: " + max);
+        System.out.println("Average: " + average);
+
+
+
+        for (Map.Entry<Integer, Integer> entry : probeCountMap.entrySet()) {
+            int carIndex = entry.getKey();
+            int probes = entry.getValue();
+            System.out.println("Car Index: " + carIndex);
+            System.out.println("Probes: " + probes);
+        }
+
+
 
         int noCollisions = 0;
 

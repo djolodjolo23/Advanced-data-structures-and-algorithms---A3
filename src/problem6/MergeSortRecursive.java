@@ -21,7 +21,6 @@ public class MergeSortRecursive {
         int leftEnd = rightPos - 1;
         int tmpPos = leftPos;
         int numElements = rightEnd - leftPos + 1;
-
         while (leftPos <= leftEnd && rightPos <= rightEnd) {
             if (a[leftPos].compareTo(a[rightPos]) <= 0) {
                 tmpArray[tmpPos++] = a[leftPos++];
@@ -29,7 +28,6 @@ public class MergeSortRecursive {
                 tmpArray[tmpPos++] = a[rightPos++];
             }
         }
-
         while (leftPos <= leftEnd) {
             tmpArray[tmpPos++] = a[leftPos++];
         }
@@ -37,7 +35,6 @@ public class MergeSortRecursive {
         while (rightPos <= rightEnd) {
             tmpArray[tmpPos++] = a[rightPos++];
         }
-
         for (int i = 0; i < numElements; i++, rightEnd--) {
             a[rightEnd] = tmpArray[rightEnd];
         }
