@@ -8,7 +8,7 @@ public class Main {
 
 
         Integer[] array = {2, 8, 5, 3, 9, 4};
-        InsertSort.doInsertSort(array);
+        InsertSort.doInsertSort(array, 0, array.length - 1);
 
         System.out.println(Arrays.toString(array));
 
