@@ -14,6 +14,25 @@ public class Main {
 
         QuadraticProbingHashTable<Car> quadraticProbingHashTable = new QuadraticProbingHashTable<>();
 
+        Car firstCar = new Car();
+        Car secondCar = new Car();
+        Car thirdCar = new Car();
+
+        quadraticProbingHashTable.insert(firstCar);
+        quadraticProbingHashTable.insert(secondCar);
+        quadraticProbingHashTable.insert(thirdCar);
+
+        System.out.println(quadraticProbingHashTable.contains(firstCar));
+
+        quadraticProbingHashTable.remove(firstCar);
+
+        System.out.println(quadraticProbingHashTable.contains(firstCar));
+
+
+
+
+        // bottom part is commented out since I used it data analysis.
+        /*
         List<List<QuadraticProbingHashTable.Stats<Car>>> hashTableOccurrences = new ArrayList<>();
 
         List<Integer> collisionsAt = new ArrayList<>();
@@ -45,7 +64,7 @@ public class Main {
             System.out.println();
         }
 
-         */
+
 
         List<Integer> allProbes = new ArrayList<>();
 
@@ -122,5 +141,11 @@ public class Main {
 
 
         System.out.println();
+
+
+        if (max > 7) {
+            main(args);
+        }
+        */
     }
 }

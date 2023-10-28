@@ -15,13 +15,28 @@ public class Main {
 
         QuadraticProbingHashTable<String> quadraticProbingHashTable = new QuadraticProbingHashTable<>();
 
-        List<List<QuadraticProbingHashTable.Stats<String>>> hashTableOccurrences = new ArrayList<>();
-        Statistics<String> statistics = new Statistics<>();
+        quadraticProbingHashTable.insert("a");
+        quadraticProbingHashTable.insert("b");
+        quadraticProbingHashTable.insert("c");
+
+        System.out.println(quadraticProbingHashTable.contains("a"));
+
+        quadraticProbingHashTable.remove("a");
+
+        System.out.println(quadraticProbingHashTable.contains("a"));
+
+
+
+        // bottom part is commented out since I used it data analysis.
+        /**
+
+
 
         CSVExporter<Integer> csvExporter = new CSVExporter<>();
-
-
+        Statistics<String> statistics = new Statistics<>();
+        List<List<QuadraticProbingHashTable.Stats<String>>> hashTableOccurrences = new ArrayList<>();
         List<Integer> collisionsAt = new ArrayList<>();
+
 
         for (int i = 0; i < 1000; i++) {
             for (int j = 0; j < 10; j++) {
@@ -53,6 +68,6 @@ public class Main {
 
 
         System.out.println();
-
+        */
     }
 }

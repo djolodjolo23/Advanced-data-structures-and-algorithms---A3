@@ -38,7 +38,7 @@ public class QuickSort {
         }
     }
 
-    public static <AnyType extends Comparable<? super AnyType>> int slice(AnyType[] a, int left, int right, AnyType pivot) {
+    private static <AnyType extends Comparable<? super AnyType>> int slice(AnyType[] a, int left, int right, AnyType pivot) {
         int i = left;
         for (int j = left; j < right; j++) {
             if (a[j].compareTo(pivot) <= 0) {
@@ -51,6 +51,7 @@ public class QuickSort {
         swapReferences(a, i, right);
         return i;
     }
+
 
     private static <AnyType> void swapReferences(AnyType[] a, int i, int j) {
         AnyType temp = a[i];

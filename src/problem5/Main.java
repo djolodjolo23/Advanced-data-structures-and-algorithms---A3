@@ -15,20 +15,24 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // generate array of 100 random numbers from 1 to 1000
         Random random = new Random();
 
         Statistics<Integer> statistics = new Statistics<>();
 
 
-        Integer [] array = new Integer[100];
+        Integer [] array = new Integer[50];
         for (int i = 0; i < array.length; i++) {
-            array[i] = random.nextInt(1000);
+            array[i] = random.nextInt(200);
         }
+
+
+        System.out.println(Arrays.toString(array));
 
         int recommendedDepth = statistics.getRecommendedDepth(array);
 
         QuickSort.doQuickSort(array, recommendedDepth);
+
+        System.out.println(Arrays.toString(array));
 
 
 

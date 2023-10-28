@@ -28,11 +28,11 @@ public class MergeSortRecursive {
                 tmpArray[tmpPos++] = a[rightPos++];
             }
         }
-        while (leftPos <= leftEnd) {
+        while (leftPos <= leftEnd) { // copy remaining
             tmpArray[tmpPos++] = a[leftPos++];
         }
 
-        while (rightPos <= rightEnd) {
+        while (rightPos <= rightEnd) { // copy remaining
             tmpArray[tmpPos++] = a[rightPos++];
         }
         for (int i = 0; i < numElements; i++, rightEnd--) {

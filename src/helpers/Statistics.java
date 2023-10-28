@@ -10,18 +10,12 @@ import java.util.Map;
 public class Statistics<AnyType> {
 
 
-    public Map<Integer, Integer> getOccurrences(List<List<QuadraticProbingHashTable.Stats<Car>>> listOfLists) {
-        Map<Integer, Integer> map = new HashMap<>();
-        for (List<QuadraticProbingHashTable.Stats<Car>> list : listOfLists) {
-            for (QuadraticProbingHashTable.Stats<Car> element : list) {
-                int key = element.getFirstPos();
-                map.put(key, map.getOrDefault(key, 0) + 1);
-            }
-        }
-        return map;
-    }
-
-    public Map<Integer, Integer> getOccurrencesString(List<List<QuadraticProbingHashTable.Stats<AnyType>>> listOfLists) {
+    /**
+     * Returns the average number of probes for a given hash table.
+     * @param listOfLists is the list of hash table occurrences.
+     * @return the average number of probes for a given hash table.
+     */
+    public Map<Integer, Integer> getOccurrences(List<List<QuadraticProbingHashTable.Stats<AnyType>>> listOfLists) {
         Map<Integer, Integer> map = new HashMap<>();
         for (List<QuadraticProbingHashTable.Stats<AnyType>> list : listOfLists) {
             for (QuadraticProbingHashTable.Stats<AnyType> element : list) {
@@ -32,7 +26,11 @@ public class Statistics<AnyType> {
         return map;
     }
 
-
+    /**
+     * Recommended depth for quick sort algorithm, based on the size of the array.
+     * @param array is the array to be sorted.
+     * @return the recommended depth based on the array length.
+     */
     public int getRecommendedDepth(AnyType[] array) {
         int depth = 0;
         int n = array.length;
@@ -43,17 +41,10 @@ public class Statistics<AnyType> {
         return ++depth;
     }
 
-    public double findAverageDouble(List<Integer> list) {
-        int sum = 0;
-        for (Integer element : list) {
-            sum += element;
-        }
-        return (double) sum / list.size();
-    }
-
-
-
-
+    /**
+     * Generates a random string of length 10.
+     * @return a random string of length 10.
+     */
     public String generateRandomString() {
         String characters = "abcdefghijklmnopqrstuvwxyz.?|#!%$@^#*()/1234567890";
         StringBuilder sb = new StringBuilder();

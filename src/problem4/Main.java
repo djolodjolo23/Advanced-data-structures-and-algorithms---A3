@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
 
-        Integer[] array = {10, 20, 15, 12, 40, 25, 18};
+        Integer[] array = {20, 30, 10, 5, 11};
 
         HeapSort.doHeapSort(array);
 

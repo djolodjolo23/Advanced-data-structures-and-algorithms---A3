@@ -1,4 +1,5 @@
 package problem4;
+
 public class HeapSort {
 
 
@@ -6,37 +7,36 @@ public class HeapSort {
         if (array == null || array.length < 2) {
             return;
         }
-        int n = array.length;
-
-        for (int i = (n / 2) - 1; i >= 0; i--) {
-            heapify(array, n, i);
+        for (int i = (array.length / 2) - 1; i >= 0; i--) {
+            percolateDown(array, array.length, i);
         }
 
-        for (int i = n - 1; i >= 0; i--) {
+        for (int i = array.length - 1; i >= 0; i--) {
             AnyType temp = array[0];
             array[0] = array[i];
             array[i] = temp;
-            heapify(array, i, 0);
+            percolateDown(array, i, 0);
         }
     }
 
 
-    private static<AnyType extends Comparable<? super AnyType>>void heapify(AnyType[] array, int n, int parentIndex) {
+
+    private static<AnyType extends Comparable<? super AnyType>>void percolateDown(AnyType[] array, int arrayLength, int parentIndex) {
         int largest = parentIndex;
         int leftChild = 2 * parentIndex + 1;
         int rightChild = 2 * parentIndex + 2;
 
-        if (leftChild < n && array[leftChild].compareTo(array[largest]) > 0) {
+        if (leftChild < arrayLength && array[leftChild].compareTo(array[largest]) > 0) {
             largest = leftChild;
         }
-        if (rightChild < n && array[rightChild].compareTo(array[largest]) > 0) {
+        if (rightChild < arrayLength && array[rightChild].compareTo(array[largest]) > 0) {
             largest = rightChild;
         }
         if (largest != parentIndex) {
             AnyType temp = array[parentIndex];
             array[parentIndex] = array[largest];
             array[largest] = temp;
-            heapify(array, n, largest);
+            percolateDown(array, arrayLength, largest);
         }
     }
 

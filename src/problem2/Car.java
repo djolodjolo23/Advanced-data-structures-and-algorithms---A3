@@ -3,6 +3,9 @@ package problem2;
 import java.util.Objects;
 import java.util.Random;
 
+/**
+ * Car class represents a car with a license plate number, year, colour, make and transmission.
+ */
 public class Car {
 
     private final String licensePlateNumber;
@@ -58,6 +61,7 @@ public class Car {
         }
         return result;
     }
+
 
 
     private int customHash(Object object) {
